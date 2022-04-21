@@ -1,14 +1,15 @@
 import React from "react";
 import "./App.css";
 import { DataContextProvider } from "../../contexts/DataContext";
+import DashBoard from "../DashBoard/DashBoard"
+import Loader from "../Loader/Loader"
 
-function App() {
-  console.log(data)
+const App = () => {
   return (
     <div className="App">
-      <h1>Hello, World!</h1>
+    <Loader />
     <DataContextProvider>
-      
+      <DashBoard />
     </DataContextProvider>
     </div>
   );
