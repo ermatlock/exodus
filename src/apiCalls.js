@@ -1,11 +1,12 @@
 export const fetchData = async (query) => {
-  return fetch(`https://api.teleport.org/api/${query}`).then(
-    (response) => {
-      if (!response.ok) {
-        throw new Error("Error getting");
-      } else {
-        return response.json();
-      }
+  try {
+    let response = await fetch(`https://api.teleport.org/api/${query}`);
+    if (!response.ok) {
+      throw new Error(`${response.error}, Sorry, I was unable to get that!`);
     }
-  );
+    let data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
 };
