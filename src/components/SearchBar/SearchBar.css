@@ -1,16 +1,16 @@
 .search-bar-container {
   margin-right: 1em;
 
-  input {
-    background-color: #95fcfc;
-    width: 22em;
-    border-radius: 8px 0px 0px 8px;
-    border: 0;
-  }
+}
+.search-bar-container > input {
+  background-color: #95fcfc;
+  width: 22em;
+  border-radius: 8px 0px 0px 8px;
+  border: 0;
+}
 
-  form {
-    display: flex;
-  }
+search-bar-container > form {
+  display: flex;
 }
 
 .button-search {
