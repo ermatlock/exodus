@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import "./DashBoard.css";
-import Loader from "../Loader/Loader";
-import { nanoid } from "nanoid";
-const DashBoard = ({ data }) => {
-  data && console.log(data);
+import {favorites} from "../../data"
+
+const DashBoard = ({ data, isLoading, isFavorited, toggleFavorited }) => {
 
   return (
     <section className="dash-board-container">
       {data && (
         <>
           <h1>{data.name}</h1>
+          <button className="favorites"  ><span className="true"></span></button>
           <p>Country:</p>
-          <img src={data.image}></img>
+          <p>Overall Score: </p>
+          <img src={data.image.web}></img>
           <div dangerouslySetInnerHTML={{ __html: data.summary }} />
             <iframe
               className="embed-detail"
