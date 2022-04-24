@@ -68,6 +68,8 @@ export const cities = {
   "Washington, D.C.": "washington-dc",
 };
 
+export const favorites = ["buffalo", "denver", "san-diego"]
+
 export const cityUIds = Object.keys(cities).map(city => {
     return cities[city];
   })
