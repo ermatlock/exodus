@@ -23,9 +23,7 @@
   height: 160vh;
 }
 
-
 .favorites {
-  
   box-sizing: content-box;
   background-position: center;
   border: 0px solid black;
@@ -50,8 +48,8 @@
 .false {
   background: url(../../images/not-favorited.svg) no-repeat center;
   background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 2em;
-    width: 2em;
+  cursor: pointer;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
 }

@@ -19,10 +19,9 @@
   cursor: pointer;
 }
 
-
 .city-name {
-  padding: .3em;
-  overflow: wrap; 
+  padding: 0.3em;
+  overflow: wrap;
   position: absolute;
   color: white;
 }
@@ -40,21 +39,19 @@
 
 .true {
   background: url(../../images/favorited.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    border-radius: 50%;
-    display: inline-block;
-    height: 2em;
-    width: 2em;
+  background-size: contain;
+  cursor: pointer;
+  border-radius: 50%;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
 }
 
 .false {
   background: url(../../images/not-favorited.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 2em;
-    width: 2em;
+  background-size: contain;
+  cursor: pointer;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
 }
-
-

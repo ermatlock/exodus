@@ -22,9 +22,6 @@ class SearchBar extends Component {
       <option value="" disabled>--Please choose a City--</option>
       {Object.keys(cities).map((city) => <option value={cities[city]}>{city}</option>)}
     </select>
-      {/* <button className="button-search" onSubmit={(event) => this.searchCity(event)}>
-        <span type="text">Find City</span>
-      </button> */}
     </form>
   );
   }

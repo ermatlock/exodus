@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { nanoid } from "nanoid";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ErrorPage from "../ErrorPage/ErrorPage";
@@ -15,7 +13,7 @@ import {
   fetchImages,
   fetchScores,
 } from "../../apiCalls";
-import { roundTo2, cleanCityData } from "../../utils";
+import { roundTo2 } from "../../utils";
 import { favorites } from "../../data";
 class App extends Component {
   constructor() {
@@ -35,30 +33,26 @@ class App extends Component {
 
   componentDidMount = () => {
     this.fetchMyStuff(this.state.currentCityId);
-    this.collectFavorites(this.state.favorites)
-  }
+    this.collectFavorites(this.state.favorites);
+  };
 
   collectFavorites = (favArr) => {
     const newArr = favArr.reduce((arr, id) => {
-     Promise.all([
-        fetchCity(id),
-        fetchImages(id),
-      ])
-        .then((values) => {
-          let currentCity = {
-            id: id,
-            name: values[0].full_name,
-            image: values[1].photos[0].image.mobile,
-            isFavorited: true
-          };
-          arr.push(currentCity)
-        })
-        return arr
-      }, [])
-      this.setState({
-        favoritesData: newArr
+      Promise.all([fetchCity(id), fetchImages(id)]).then((values) => {
+        let currentCity = {
+          id: id,
+          name: values[0].full_name,
+          image: values[1].photos[0].image.mobile,
+          isFavorited: true,
+        };
+        arr.push(currentCity);
       });
-    }
+      return arr;
+    }, []);
+    this.setState({
+      favoritesData: newArr,
+    });
+  };
 
   fetchMyStuff = (id) => {
     Promise.all([
@@ -66,21 +60,20 @@ class App extends Component {
       fetchScores(id),
       fetchDetails(id),
       fetchImages(id),
-    ])
-      .then((values) => {
-        let currentCity = {
-          id: id,
-          cityBasics: values[0],
-          cityScores: values[1],
-          cityDetails: values[2],
-          cityImages: values[3],
-        };
-        this.setState({
-          allCityData: currentCity,
-          currentCityData: this.cleanCityData(currentCity),
-          isLoading: false
-        });
-      })
+    ]).then((values) => {
+      let currentCity = {
+        id: id,
+        cityBasics: values[0],
+        cityScores: values[1],
+        cityDetails: values[2],
+        cityImages: values[3],
+      };
+      this.setState({
+        allCityData: currentCity,
+        currentCityData: this.cleanCityData(currentCity),
+        isLoading: false,
+      });
+    });
   };
 
   cleanCityData = (data) => {
@@ -94,8 +87,12 @@ class App extends Component {
         : data.cityImages.photos[0].image,
       summary: data.cityScores.summary,
       overallScore: roundTo2(data.cityScores.teleport_city_score),
-      lgtbqScore: roundTo2(data.cityDetails.categories[12].data[10].float_value),
-      minoritized: roundTo2(data.cityDetails.categories[12].data[12].float_value),
+      lgtbqScore: roundTo2(
+        data.cityDetails.categories[12].data[10].float_value
+      ),
+      minoritized: roundTo2(
+        data.cityDetails.categories[12].data[12].float_value
+      ),
       isFavorited: this.checkFavorite(data.id),
     };
     return cleanedData;
@@ -110,7 +107,7 @@ class App extends Component {
   };
 
   toggleFavorited = (id) => {
-    const { favorites, currentCityData, currentCityId } = this.state;
+    const { favorites, currentCityData } = this.state;
     let newFavorites;
     if (favorites.includes(id)) {
       favorites.splice(favorites.indexOf(id), 1);
@@ -124,8 +121,8 @@ class App extends Component {
         isFavorited: !prevState.currentCityData.isFavorited,
       },
       favorites: newFavorites,
-    }))
-    this.collectFavorites(newFavorites)
+    }));
+    this.collectFavorites(newFavorites);
   };
 
   unFavorite = (id) => {
@@ -133,10 +130,8 @@ class App extends Component {
     let newFavorites;
     favorites.splice(favorites.indexOf(id), 1);
     newFavorites = favorites;
-    this.collectFavorites(newFavorites)
-    // this.setState({favorites: newFavorites})
-  }
-
+    this.collectFavorites(newFavorites);
+  };
 
   render() {
     const {
