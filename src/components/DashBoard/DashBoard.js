@@ -9,7 +9,7 @@ const DashBoard = ({ data, isLoading, isFavorited, toggleFavorited }) => {
       {data && (
         <>
           <h1>{data.name}</h1>
-          <button className="favorites"  ><span className="true"></span></button>
+          <button className="favorites" onClick={toggleFavorited}><span className={`${isFavorited}`}></span></button>
           <p>Country:</p>
           <p>Overall Score: </p>
           <img src={data.image.web}></img>
