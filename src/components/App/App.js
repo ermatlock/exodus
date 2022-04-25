@@ -1,40 +1,65 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import DashBoard from "../DashBoard/DashBoard";
-import Favorites from "../Favorites/Favorites"
+import Favorites from "../Favorites/Favorites";
+import Loader from "../Loader/Loader";
 import {
   fetchCity,
   fetchDetails,
   fetchImages,
   fetchScores,
 } from "../../apiCalls";
-import {roundTo2, cleanCityData} from "../../utils"
-import {favorites} from "../../data"
-
+import { roundTo2, cleanCityData } from "../../utils";
+import { favorites } from "../../data";
 class App extends Component {
   constructor() {
     super();
     this.state = {
       currentCityId: "buffalo",
       favorites: ["buffalo", "denver", "san-diego"],
+      favoritesData: [],
       currentCityData: null,
       allCityData: null,
-      isLoading: false,
+      isLoading: true,
       isClicked: false,
-      // isFavorited: false
+      hasError: false,
+      errorMsg: "",
     };
   }
 
-  async componentDidMount() {
+  componentDidMount = () => {
     this.fetchMyStuff(this.state.currentCityId);
-    console.log(this.state.currentCityData);
+    this.collectFavorites(this.state.favorites)
   }
+
+  collectFavorites = (favArr) => {
+    // console.log(favArr)
+    const newArr = favArr.reduce((arr, id) => {
+     Promise.all([
+        fetchCity(id),
+        fetchImages(id),
+      ])
+        .then((values) => {
+          let currentCity = {
+            id: id,
+            name: values[0].full_name,
+            image: values[1].photos[0].image.mobile,
+            isFavorited: true
+          };
+          arr.push(currentCity)
+        })
+        return arr
+      }, [])
+      this.setState({
+        favoritesData: newArr
+      });
+    }
 
   fetchMyStuff = (id) => {
     Promise.all([
@@ -42,18 +67,24 @@ class App extends Component {
       fetchScores(id),
       fetchDetails(id),
       fetchImages(id),
-    ]).then((values) => {
-      let currentCity = {
-        cityBasics: values[0],
-        cityScores: values[1],
-        cityDetails: values[2],
-        cityImages: values[3],
-      };
-      this.setState({ allCityData: currentCity, currentCityData: this.cleanCityData(currentCity) });
-    });
+    ])
+      .then((values) => {
+        let currentCity = {
+          cityBasics: values[0],
+          cityScores: values[1],
+          cityDetails: values[2],
+          cityImages: values[3],
+        };
+        this.setState({
+          allCityData: currentCity,
+          currentCityData: this.cleanCityData(currentCity),
+          isLoading: false
+        });
+      })
   };
 
   cleanCityData = (data) => {
+    // console.log(data.cityDetails.categories[12].data[10].float_value)
     let cleanedData = {
       name: !data.cityBasics.full_name
         ? "City Name Missing"
@@ -64,7 +95,9 @@ class App extends Component {
         : data.cityImages.photos[0].image,
       summary: data.cityScores.summary,
       overallScore: roundTo2(data.cityScores.teleport_city_score),
-      isFavorited: this.checkFavorite(this.state.currentCityId)
+      lgtbqScore: roundTo2(data.cityDetails.categories[12].data[10].float_value),
+      minoritized: roundTo2(data.cityDetails.categories[12].data[12].float_value),
+      isFavorited: this.checkFavorite(this.state.currentCityId),
     };
     return cleanedData;
   };
@@ -75,49 +108,68 @@ class App extends Component {
   };
 
   checkFavorite = (id) => {
-    return favorites.includes(id) ? true : false
-    
-
-  }
+    return favorites.includes(id) ? true : false;
+  };
 
   toggleFavorited = () => {
-    const {favorites, currentCityData, currentCityId} = this.state
-    let newFavorites
+    const { favorites, currentCityData, currentCityId } = this.state;
+    let newFavorites;
     if (favorites.includes(currentCityId)) {
-      favorites.splice(favorites.indexOf(currentCityId), 1)
-      newFavorites = favorites
+      favorites.splice(favorites.indexOf(currentCityId), 1);
+      newFavorites = favorites;
     } else {
-      newFavorites = [...favorites, currentCityId ]
+      newFavorites = [...favorites, currentCityId];
     }
-    this.setState(prevState => ({ 
-      currentCityData: {...currentCityData, isFavorited : !prevState.currentCityData.isFavorited},
-      favorites: newFavorites
-    }));
-    
+    this.setState((prevState) => ({
+      currentCityData: {
+        ...currentCityData,
+        isFavorited: !prevState.currentCityData.isFavorited,
+      },
+      favorites: newFavorites,
+    }))
+    this.collectFavorites(newFavorites)
+  };
+
+  unFavorite = (id) => {
+    const { favorites } = this.state;
+    let newFavorites;
+    favorites.splice(favorites.indexOf(id), 1);
+    newFavorites = favorites;
+    this.setState({favorites: newFavorites})
   }
 
+
   render() {
-    const {currentCityId, currentCityData, isLoading, } = this.state
+    const {
+      currentCityId,
+      currentCityData,
+      isLoading,
+      hasError,
+      errorMsg,
+      favoritesData,
+    } = this.state;
+
     return (
       <div className="App">
-        <Header
-          id={currentCityId}
-          changeId={this.changeId}
-        />
+        <Header id={currentCityId} changeId={this.changeId} />
         <Switch>
           {/* main dashboard */}
           <Route
             exact
             path="/"
             render={() => {
-              return currentCityData && <DashBoard
+              return currentCityData ? (
+                <DashBoard
                   key={currentCityId}
                   data={currentCityData}
                   isLoading={isLoading}
                   isFavorited={currentCityData.isFavorited}
                   toggleFavorited={this.toggleFavorited}
+                  hasError={hasError}
                 />
-              
+              ) : (
+                <Loader />
+              );
             }}
           />
           {/* single city */}
@@ -125,14 +177,24 @@ class App extends Component {
             exact
             path="/favorites"
             render={() => {
-              return <Favorites favorites={this.favoriteCities} isLoading={isLoading} />;
+              return favoritesData ? (
+                <Favorites
+                  unFavorite={this.unFavorite}
+                  isLoading={isLoading}
+                  favoritesData={favoritesData}
+                  fetchMyStuff={this.fetchMyStuff}
+                />
+              ) : (
+                <Loader />
+              );
             }}
           />
 
           {/* error page  */}
           <Route>
-            <ErrorPage />
+            <ErrorPage error={errorMsg} />
           </Route>
+          <Redirect to="/" />
         </Switch>
         <Footer />
       </div>
