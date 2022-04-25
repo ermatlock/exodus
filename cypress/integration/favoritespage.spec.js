@@ -67,7 +67,7 @@ describe('Loading Page', () => {
       fixture: 'cityImages.json'
     }).as("matchedUrl")
     cy.visit('http://localhost:3000/favorites')
-    cy.get("#card-denver").find("city-stats-button").click()
+    .get("#card-denver").get(".city-stats-button")
     .should('be.visible')
   });
 
