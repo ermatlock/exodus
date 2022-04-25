@@ -11,10 +11,7 @@ const Favorites = ({
   unFavorite
 }) => {
   const favoriteCards = favoritesData.map((city) => {
-    // console.log(city);
     return (
-      
-    
         <CityCard
           unFavorite={unFavorite}
           fetchMyStuff={fetchMyStuff}
@@ -22,7 +19,6 @@ const Favorites = ({
           key={`card-${city.id}`}
           isFavorited={city.isFavorited}
         />
-      
     );
   });
 
