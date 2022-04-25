@@ -22,11 +22,12 @@ class App extends Component {
     super();
     this.state = {
       currentCityId: "buffalo",
+      favorites: ["buffalo", "denver", "san-diego"],
       currentCityData: null,
       allCityData: null,
       isLoading: false,
       isClicked: false,
-      isFavorited: false
+      // isFavorited: false
     };
   }
 
@@ -75,29 +76,42 @@ class App extends Component {
 
   checkFavorite = (id) => {
     return favorites.includes(id) ? true : false
+    
+
   }
 
-  toggleFavorited() {
-    this.setState(prevState => ({
-      isFavorited: !prevState.isFavorited
-    }));
-  }
-
-  clickFavorite = (id) => {
-    if (favorites.includes(id)) {
-      favorites = favorites.filter(favorite => favorite !== id)
-      return false
+  toggleFavorited = () => {
+    const {favorites, currentCityData, currentCityId} = this.state
+    let newFavorites
+    if (favorites.includes(currentCityId)) {
+      favorites.splice(favorites.indexOf(currentCityId), 1)
+      newFavorites = favorites
     } else {
-      favorites.push(id)
-      return true
+      newFavorites = [...favorites, currentCityId ]
     }
+    this.setState(prevState => ({ 
+      currentCityData: {...currentCityData, isFavorited : !prevState.currentCityData.isFavorited},
+      favorites: newFavorites
+    }));
+    
   }
+
+  // clickFavorite = (id) => {
+  //   if (favorites.includes(id)) {
+  //     favorites = favorites.filter(favorite => favorite !== id)
+  //     return false
+  //   } else {
+  //     favorites.push(id)
+  //     return true
+  //   }
+  // }
 
   render() {
+    const {currentCityId, currentCityData, isLoading, } = this.state
     return (
       <div className="App">
         <Header
-          id={this.state.currentCityId}
+          id={currentCityId}
           changeId={this.changeId}
         />
         <Switch>
@@ -106,15 +120,14 @@ class App extends Component {
             exact
             path="/"
             render={() => {
-              return (
-                <DashBoard
-                  key={this.state.currentCityId}
-                  data={this.state.currentCityData}
-                  isLoading={this.state.isLoading}
-                  isFavorited={this.isFavorited}
+              return currentCityData && <DashBoard
+                  key={currentCityId}
+                  data={currentCityData}
+                  isLoading={isLoading}
+                  isFavorited={currentCityData.isFavorited}
                   toggleFavorited={this.toggleFavorited}
                 />
-              );
+              
             }}
           />
           {/* single city */}
@@ -122,7 +135,7 @@ class App extends Component {
             exact
             path="/favorites"
             render={() => {
-              return <Favorites favorites={this.state.favoriteCities} isLoading={this.state.isLoading} />;
+              return <Favorites favorites={this.favoriteCities} isLoading={isLoading} />;
             }}
           />
 
