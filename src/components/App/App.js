@@ -39,7 +39,6 @@ class App extends Component {
   }
 
   collectFavorites = (favArr) => {
-    // console.log(favArr)
     const newArr = favArr.reduce((arr, id) => {
      Promise.all([
         fetchCity(id),
@@ -70,6 +69,7 @@ class App extends Component {
     ])
       .then((values) => {
         let currentCity = {
+          id: id,
           cityBasics: values[0],
           cityScores: values[1],
           cityDetails: values[2],
@@ -84,12 +84,11 @@ class App extends Component {
   };
 
   cleanCityData = (data) => {
-    // console.log(data.cityDetails.categories[12].data[10].float_value)
     let cleanedData = {
       name: !data.cityBasics.full_name
         ? "City Name Missing"
         : data.cityBasics.full_name,
-      id: this.state.currentCityId,
+      id: data.id,
       image: !data.cityImages.photos[0].image
         ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ncenet.com%2Fno-image-found&psig=AOvVaw30p53n61C-S7F5gmBwRYI4&ust=1650825656378000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPjI1vzqqvcCFQAAAAAdAAAAABAt"
         : data.cityImages.photos[0].image,
@@ -97,13 +96,12 @@ class App extends Component {
       overallScore: roundTo2(data.cityScores.teleport_city_score),
       lgtbqScore: roundTo2(data.cityDetails.categories[12].data[10].float_value),
       minoritized: roundTo2(data.cityDetails.categories[12].data[12].float_value),
-      isFavorited: this.checkFavorite(this.state.currentCityId),
+      isFavorited: this.checkFavorite(data.id),
     };
     return cleanedData;
   };
 
   changeId = (id) => {
-    this.setState({ currentCityId: id });
     this.fetchMyStuff(id);
   };
 
@@ -111,14 +109,14 @@ class App extends Component {
     return favorites.includes(id) ? true : false;
   };
 
-  toggleFavorited = () => {
+  toggleFavorited = (id) => {
     const { favorites, currentCityData, currentCityId } = this.state;
     let newFavorites;
-    if (favorites.includes(currentCityId)) {
-      favorites.splice(favorites.indexOf(currentCityId), 1);
+    if (favorites.includes(id)) {
+      favorites.splice(favorites.indexOf(id), 1);
       newFavorites = favorites;
     } else {
-      newFavorites = [...favorites, currentCityId];
+      newFavorites = [...favorites, id];
     }
     this.setState((prevState) => ({
       currentCityData: {
@@ -135,7 +133,8 @@ class App extends Component {
     let newFavorites;
     favorites.splice(favorites.indexOf(id), 1);
     newFavorites = favorites;
-    this.setState({favorites: newFavorites})
+    this.collectFavorites(newFavorites)
+    // this.setState({favorites: newFavorites})
   }
 
 
@@ -183,6 +182,8 @@ class App extends Component {
                   isLoading={isLoading}
                   favoritesData={favoritesData}
                   fetchMyStuff={this.fetchMyStuff}
+                  toggleFavorited={this.toggleFavorited}
+                  collectFavorites={this.collectFavorites}
                 />
               ) : (
                 <Loader />
