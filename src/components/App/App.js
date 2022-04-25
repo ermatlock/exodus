@@ -53,7 +53,7 @@ class App extends Component {
     });
   };
 
-  cleanCityData = (data, isItFavorite) => {
+  cleanCityData = (data) => {
     let cleanedData = {
       name: !data.cityBasics.full_name
         ? "City Name Missing"
@@ -95,16 +95,6 @@ class App extends Component {
     }));
     
   }
-
-  // clickFavorite = (id) => {
-  //   if (favorites.includes(id)) {
-  //     favorites = favorites.filter(favorite => favorite !== id)
-  //     return false
-  //   } else {
-  //     favorites.push(id)
-  //     return true
-  //   }
-  // }
 
   render() {
     const {currentCityId, currentCityData, isLoading, } = this.state
