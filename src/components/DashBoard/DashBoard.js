@@ -10,7 +10,7 @@ const DashBoard = ({ data, isLoading, isFavorited, toggleFavorited }) => {
         <>
         <div className="top-bar">
           <h1>{data.name}</h1>
-          <button className="favorites" onClick={toggleFavorited}><span className={`${isFavorited}`}></span></button>
+          <button className="favorites" onClick={() => toggleFavorited(data.id)}><span className={`${isFavorited}`}></span></button>
 
         </div>
           <h2>Overall City Score: {data.overallScore} (ranking) </h2>
