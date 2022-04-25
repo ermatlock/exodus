@@ -8,12 +8,17 @@ const DashBoard = ({ data, isLoading, isFavorited, toggleFavorited }) => {
     <section className="dash-board-container">
       {data && (
         <>
+        <div className="top-bar">
           <h1>{data.name}</h1>
           <button className="favorites" onClick={toggleFavorited}><span className={`${isFavorited}`}></span></button>
-          <p>Country:</p>
-          <p>Overall Score: </p>
+
+        </div>
+          <h2>Overall City Score: {data.overallScore} (ranking) </h2>
+          <h2>LGBTQ Score: {data.lgtbqScore} (out of 100) </h2>
+          <h2>Minoritized score: {data.minoritized} (out of 1)</h2>
+
           <img src={data.image.web}></img>
-          <div dangerouslySetInnerHTML={{ __html: data.summary }} />
+          <div className="summary" dangerouslySetInnerHTML={{ __html: data.summary }} />
             <iframe
               className="embed-detail"
               title="widget"
