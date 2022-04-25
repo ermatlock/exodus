@@ -1,22 +1,32 @@
-import { render } from '@testing-library/react'
-import React, { Component } from 'react'
-import "./Favorites.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Favorites.css";
+import CityCard from "../CityCard/CityCard";
 
-class Favorites extends Component {
-  constructor() {
-    super()
-    this.state = {
+const Favorites = ({
+  fetchMyStuff,
+  toggleFavorited,
+  isLoading,
+  favoritesData,
+  unFavorite
+}) => {
+  const favoriteCards = favoritesData.map((city) => {
+    // console.log(city);
+    return (
+      
+    
+        <CityCard
+          unFavorite={unFavorite}
+          fetchMyStuff={fetchMyStuff}
+          city={city}
+          key={`card-${city.id}`}
+          isFavorited={city.isFavorited}
+        />
+      
+    );
+  });
 
-    }
-  }
+  return <div className="favorites-container">{favoriteCards}</div>;
+};
 
- render () {
-   return (
-     <div className="favorites-container">
-
-     </div>
-   )
- }
-}
-
-export default Favorites
+export default Favorites;
