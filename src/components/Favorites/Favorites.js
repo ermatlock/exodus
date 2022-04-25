@@ -4,8 +4,6 @@ import CityCard from "../CityCard/CityCard";
 
 const Favorites = ({
   fetchMyStuff,
-  toggleFavorited,
-  isLoading,
   favoritesData,
   unFavorite
 }) => {
