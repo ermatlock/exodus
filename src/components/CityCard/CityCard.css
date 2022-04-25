@@ -1,0 +1,60 @@
+.city-card {
+  display: flex;
+  flex-direction: column;
+  height: 19em;
+}
+.card-button {
+  background-color: rgba(240, 248, 255, 0);
+  position: relative;
+  bottom: 3em;
+  right: -1em;
+  width: min-content;
+}
+
+.city-stats-button {
+  background-color: aqua;
+  position: relative;
+  bottom: 5em;
+  right: -8em;
+  cursor: pointer;
+}
+
+
+.city-name {
+  padding: .3em;
+  overflow: wrap; 
+  position: absolute;
+  color: white;
+}
+
+.city-card-image {
+  position: relative;
+  object-fit: cover;
+  width: 16em;
+  height: 15em;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+  transition-delay: 200ms;
+}
+
+.true {
+  background: url(../../images/favorited.svg) no-repeat top left;
+    background-size: contain;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+}
+
+.false {
+  background: url(../../images/not-favorited.svg) no-repeat top left;
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+}
+
+
