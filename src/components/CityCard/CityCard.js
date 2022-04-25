@@ -1,16 +1,22 @@
-// import React from 'react'
-// import "./CityCard.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./CityCard.css";
 
-// const CityCard = ({id, minoritizedScore, lgtbqScore, image, name}) => {
-//   return (
-//     <div className="city-card" id={id}>
-//         {/* <img src={image} alt={name}/> */}
-//         <h2>{name}</h2>
-//         <h3>LGBTQ Rating: {lgtbqScore}</h3>
-//         <h3>Minoritized Rating: {minoritizedScore}</h3>
-//     </div>
-//   )
+const CityCard = ({ unFavorite, fetchMyStuff, city, isFavorited, toggleFavorited }) => {
+  // console.log(city);
+  return (
+    <div className="city-card" id={`card-${city.id}`}>
+      <img className="city-card-image" src={city.image} alt={city.id} />
+      
+      <h2 className="city-name">{city.name}</h2>
+      <button className="card-button" ><span className="true"></span></button>
+      
+      <Link to="/">
+        <button className="city-stats-button" onClick={() => fetchMyStuff(city.id)}>See City Stats</button>
+      </Link>
 
-// }
+    </div>
+  );
+};
 
-// export default CityCard
+export default CityCard;

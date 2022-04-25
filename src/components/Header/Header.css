@@ -1,4 +1,11 @@
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 80%;
-  height: 20%
+  height: 10vh;
+}
+
+.logo {
+  height: 3em; 
 }
