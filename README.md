@@ -21,7 +21,7 @@ npm install
 ## Loading State
 The user will be greeted with a dashboard with a city displayed. Buffalo is the default option.
 
-![Main Screen]("https://user-images.githubusercontent.com/35410545/165143319-c65712d3-5a68-44fb-8d1f-baae0b3c8441.png")
+![Main Screen](https://media.giphy.com/media/BgrprtHCXvs8IOdDXm/giphy.gif)
 
 ## Searching for Cities
 There is a dropdown menu that will allow you search through cities. Just select and the page will update automatically.
@@ -29,12 +29,11 @@ There is a dropdown menu that will allow you search through cities. Just select 
 
 ## Favoriting Cities
 As you browse through the cities you may favorite them by clicking the heart icon. You can also unfavorite by turing off.
-![Cities]("https://user-images.githubusercontent.com/35410545/165143528-75a35e8e-61a5-42e6-aded-e822a8a87d29.png")
-![Favoriting]("https://user-images.githubusercontent.com/35410545/165143629-2533ff69-e4d1-40c8-a58e-3920a994371d.png")
+![Cities](https://media.giphy.com/media/8vpTREkjoKNrvYCe3T/giphy.gif)
 
 ## Viewing City Favorites Page
 You can click on the button in the header to navigate to the favorites page. You will see a list of any favorites you have added so far. To remove a favorite or to view a specific city, click on the button.
-![Favorites]("https://user-images.githubusercontent.com/35410545/165143796-87e2fc1c-df49-4684-8a9e-470be20923f9.png")
+![Favorites](https://media.giphy.com/media/IY5TePghhxbNqmRcEX/giphy.gif)
 
 ## Future Features:
 * Ability to favorite from anywhere
