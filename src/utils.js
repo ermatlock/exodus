@@ -1,12 +1,12 @@
-// // import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
-// export const getRandom = (array) => {
-//   return array[Math.floor(Math.random() * array.length)];
-// };
+export const getRandom = (array) => {
+  return array[Math.floor(Math.random() * array.length)];
+};
 
-// export const roundTo2 = (num) => {
-//   return +num.toFixed(2);
-// }
+export const roundTo2 = (num) => {
+  return +num.toFixed(2);
+}
 
 // export const cleanCityData = (data, id) => {
 //   let cleanedData = {
