@@ -25,14 +25,20 @@ The user will be greeted with a dashboard with a city displayed. Buffalo is the 
 
 ## Searching for Cities
 There is a dropdown menu that will allow you search through cities. Just select and the page will update automatically.
+
+
 ![Cities](https://media.giphy.com/media/elfdtHckptYSSq9I7m/giphy.gif)
 
 ## Favoriting Cities
 As you browse through the cities you may favorite them by clicking the heart icon. You can also unfavorite by turing off.
+
+
 ![Cities](https://media.giphy.com/media/8vpTREkjoKNrvYCe3T/giphy.gif)
 
 ## Viewing City Favorites Page
 You can click on the button in the header to navigate to the favorites page. You will see a list of any favorites you have added so far. To remove a favorite or to view a specific city, click on the button.
+
+
 ![Favorites](https://media.giphy.com/media/IY5TePghhxbNqmRcEX/giphy.gif)
 
 ## Future Features:
