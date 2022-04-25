@@ -1,56 +1,30 @@
 import React, { Component } from "react";
 import "./SearchBar.css";
-// import { DataContext } from "../../contexts/DataContext";
-
+import { cities } from "../../data";
 class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
-      citySearchName: "",
       cityId: ""
     }
   }
   
-
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ cityId: event.target.value });
+    this.props.changeId(event.target.value)
   };
 
-  // clearInputs = () => {
-  //   this.setState({ stance: "", name: "", obstacle: "", tutorial: "" });
-  // };
-
-  submitSearch = (event) => {
-    event.preventDefault();
-    const newTrick = {
-      id: Date.now(),
-      ...this.state,
-    };
-    this.props.addTrick(newTrick);
-    this.clearInputs();
-  };
-
- searchArtists = (event) => {
-    event.preventDefault();
-    data.setQuery(artistName);
-    setArtistName("");
-  };
 
   render() {
   return (
-    <form onSubmit={(event) => searchArtists(event)}>
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="search artist name"
-        name="artist-name"
-        value={artistName}
-        required
-        onChange={(event) => handleChange(event)}
-      />
-      <button className="button-search">
-        <span class="text">Find Artist</span>
-      </button>
+    <form>
+    <select value={this.state.cityId} onChange={(event) => this.handleChange(event)}>
+      <option value="" disabled>--Please choose a City--</option>
+      {Object.keys(cities).map((city) => <option value={cities[city]}>{city}</option>)}
+    </select>
+      {/* <button className="button-search" onSubmit={(event) => this.searchCity(event)}>
+        <span type="text">Find City</span>
+      </button> */}
     </form>
   );
   }
