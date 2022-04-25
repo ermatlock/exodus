@@ -19,7 +19,7 @@ const DashBoard = ({ data, isFavorited, toggleFavorited }) => {
           <h2>LGBTQ Score: {data.lgtbqScore} (out of 100) </h2>
           <h2>Minoritized score: {data.minoritized} (out of 1)</h2>
 
-          <img src={data.image.web}></img>
+          <img src={data.image.web} alt={data.name} ></img>
           <div
             className="summary"
             dangerouslySetInnerHTML={{ __html: data.summary }}

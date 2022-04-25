@@ -14,9 +14,8 @@ import {
   fetchImages,
   fetchScores,
 } from "../../apiCalls";
-import { roundTo2, } from "../../utils";
+import { roundTo2 } from "../../utils";
 import { favorites } from "../../data";
-
 
 class App extends Component {
   constructor() {
@@ -103,7 +102,7 @@ class App extends Component {
       isFavorited: this.checkFavorite(data.id),
     };
     return cleanedData;
-  }
+  };
 
   changeId = (id) => {
     this.fetchMyStuff(id);
@@ -180,11 +179,9 @@ class App extends Component {
             render={() => {
               return favoritesData ? (
                 <Favorites
-                  unFavorite={this.unFavorite}
                   isLoading={isLoading}
                   favoritesData={favoritesData}
                   fetchMyStuff={this.fetchMyStuff}
-                  toggleFavorited={this.toggleFavorited}
                   collectFavorites={this.collectFavorites}
                 />
               ) : (
@@ -197,7 +194,7 @@ class App extends Component {
           <Route>
             <ErrorPage error={errorMsg} />
           </Route>
-          {/* <Redirect to="/" /> */}
+          <Redirect to="/" />
         </Switch>
         <Footer />
       </div>

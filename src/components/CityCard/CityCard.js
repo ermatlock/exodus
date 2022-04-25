@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import "./CityCard.css";
 
 const CityCard = ({
-  unFavorite,
   fetchMyStuff,
   city,
-  isFavorited,
-  toggleFavorited,
 }) => {
   return (
     <div className="city-card" id={`card-${city.id}`}>

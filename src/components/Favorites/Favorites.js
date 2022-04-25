@@ -5,12 +5,10 @@ import CityCard from "../CityCard/CityCard";
 const Favorites = ({
   fetchMyStuff,
   favoritesData,
-  unFavorite
 }) => {
   const favoriteCards = favoritesData.map((city) => {
     return (
         <CityCard
-          unFavorite={unFavorite}
           fetchMyStuff={fetchMyStuff}
           city={city}
           key={`card-${city.id}`}
