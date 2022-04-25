@@ -7,14 +7,17 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import DashBoard from "../DashBoard/DashBoard";
 import Favorites from "../Favorites/Favorites";
 import Loader from "../Loader/Loader";
+import { nanoid } from "nanoid";
 import {
   fetchCity,
   fetchDetails,
   fetchImages,
   fetchScores,
 } from "../../apiCalls";
-import { roundTo2 } from "../../utils";
+import { roundTo2, } from "../../utils";
 import { favorites } from "../../data";
+
+
 class App extends Component {
   constructor() {
     super();
@@ -27,7 +30,7 @@ class App extends Component {
       isLoading: true,
       isClicked: false,
       hasError: false,
-      errorMsg: "",
+      errorMsg: "Sorry, we are unable to get that!",
     };
   }
 
@@ -81,22 +84,26 @@ class App extends Component {
       name: !data.cityBasics.full_name
         ? "City Name Missing"
         : data.cityBasics.full_name,
-      id: data.id,
+      id: !data.id ? nanoid() : data.id,
       image: !data.cityImages.photos[0].image
         ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ncenet.com%2Fno-image-found&psig=AOvVaw30p53n61C-S7F5gmBwRYI4&ust=1650825656378000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPjI1vzqqvcCFQAAAAAdAAAAABAt"
         : data.cityImages.photos[0].image,
-      summary: data.cityScores.summary,
-      overallScore: roundTo2(data.cityScores.teleport_city_score),
-      lgtbqScore: roundTo2(
-        data.cityDetails.categories[12].data[10].float_value
-      ),
-      minoritized: roundTo2(
-        data.cityDetails.categories[12].data[12].float_value
-      ),
+      summary: !data.cityScores.summary
+        ? "<h3>Sorry, No Summary Available</h3>"
+        : data.cityScores.summary,
+      overallScore: !data.cityScores.teleport_city_score
+        ? null
+        : roundTo2(data.cityScores.teleport_city_score),
+      lgtbqScore: !data.cityDetails.categories[12].data[10].float_value
+        ? null
+        : roundTo2(data.cityDetails.categories[12].data[10].float_value),
+      minoritized: !data.cityDetails.categories[12].data[12].float_value
+        ? null
+        : roundTo2(data.cityDetails.categories[12].data[12].float_value),
       isFavorited: this.checkFavorite(data.id),
     };
     return cleanedData;
-  };
+  }
 
   changeId = (id) => {
     this.fetchMyStuff(id);
@@ -190,7 +197,7 @@ class App extends Component {
           <Route>
             <ErrorPage error={errorMsg} />
           </Route>
-          <Redirect to="/" />
+          {/* <Redirect to="/" /> */}
         </Switch>
         <Footer />
       </div>
