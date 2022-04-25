@@ -25,16 +25,16 @@ The user will be greeted with a dashboard with a city displayed. Buffalo is the 
 
 ## Searching for Cities
 There is a dropdown menu that will allow you search through cities. Just select and the page will update automatically.
-![Main Screen]("https://user-images.githubusercontent.com/35410545/165143445-3e52e8fa-e291-4a42-a53e-3d7a20712399.png")
+![Cities]("https://user-images.githubusercontent.com/35410545/165143445-3e52e8fa-e291-4a42-a53e-3d7a20712399.png")
 
 ## Favoriting Cities
 As you browse through the cities you may favorite them by clicking the heart icon. You can also unfavorite by turing off.
-![Main Screen]("https://user-images.githubusercontent.com/35410545/165143528-75a35e8e-61a5-42e6-aded-e822a8a87d29.png")
-![Main Screen]("https://user-images.githubusercontent.com/35410545/165143629-2533ff69-e4d1-40c8-a58e-3920a994371d.png")
+![Cities]("https://user-images.githubusercontent.com/35410545/165143528-75a35e8e-61a5-42e6-aded-e822a8a87d29.png")
+![Favoriting]("https://user-images.githubusercontent.com/35410545/165143629-2533ff69-e4d1-40c8-a58e-3920a994371d.png")
 
 ## Viewing City Favorites Page
 You can click on the button in the header to navigate to the favorites page. You will see a list of any favorites you have added so far. To remove a favorite or to view a specific city, click on the button.
-![Main Screen]("https://user-images.githubusercontent.com/35410545/165143796-87e2fc1c-df49-4684-8a9e-470be20923f9.png")
+![Favorites]("https://user-images.githubusercontent.com/35410545/165143796-87e2fc1c-df49-4684-8a9e-470be20923f9.png")
 
 ## Future Features:
 * Ability to favorite from anywhere
