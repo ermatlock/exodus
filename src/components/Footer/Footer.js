@@ -4,7 +4,7 @@ import "./Footer.css"
 const Footer = () => {
   return (
     <footer>
-      <h3>Exodus: A site to discover the best place to live</h3>
+      <h3>Exodus: A site to discover the best place to be yourself</h3>
     </footer>
   )
 }
