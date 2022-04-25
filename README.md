@@ -1,12 +1,13 @@
 # Exodus
 ## Showcase
 ## Project Overview
-Exodus is primarily focused on finding cities that are more accommodating to minoritized and LGBTQ persons. It allows the user to search over 68 us cities and review their ratings. The user can also favorite the placed they are considering living in.
+Exodus is primarily focused on finding cities that are more accommodating to minoritized and LGBTQ persons. It allows the user to search over 68 us cities and review their ratings. The user can also favorite the placed they are considering living in. This site consumes the Teleport.org API which gathers city data from around the world.
 
 #### Objective:
 Use react, react router, and asynchronous JavaScript to spin up a site in less than a week. Implement end-to-end testing with cypress.
 
 ## Instructions
+View the deployed site [here!](https://exodus-showcase.herokuapp.com/)
 
 To download the repository:
 - Clone the [repository](https://github.com/ermatlock/exodus) to your local machine
