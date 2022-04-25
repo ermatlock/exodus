@@ -24,7 +24,7 @@ describe('Loading Page', () => {
     .should('be.visible')
   });
 
-  it('As a user, I should be able to click the "back top main" button to go to the homepage', () => {
+  it('As a user, I should be able to click the "back to main" button to go to the homepage', () => {
     cy.intercept('GET', "https://api.teleport.org/api/urban_areas/slug:buffalo/", {
         statusCode: 200,
         fixture: 'cityData.json'
@@ -67,7 +67,7 @@ describe('Loading Page', () => {
       fixture: 'cityImages.json'
     }).as("matchedUrl")
     cy.visit('http://localhost:3000/favorites')
-    cy.get("#")
+    cy.get("#card-denver").find("city-stats-button").click()
     .should('be.visible')
   });
 
