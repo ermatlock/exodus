@@ -25,7 +25,7 @@ The user will be greeted with a dashboard with a city displayed. Buffalo is the 
 
 ## Searching for Cities
 There is a dropdown menu that will allow you search through cities. Just select and the page will update automatically.
-![Cities]("https://user-images.githubusercontent.com/35410545/165143445-3e52e8fa-e291-4a42-a53e-3d7a20712399.png")
+![Cities](https://media.giphy.com/media/elfdtHckptYSSq9I7m/giphy.gif)
 
 ## Favoriting Cities
 As you browse through the cities you may favorite them by clicking the heart icon. You can also unfavorite by turing off.
