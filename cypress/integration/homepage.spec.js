@@ -165,27 +165,27 @@ it('As a user, I should see a widget with LGBT Rights', () => {
   
 });
 
-it('As a user, if the server is down, I will get an error message', () => {
-  cy.intercept('GET', "https://api.teleport.org/api/urban_areas/slug:buffalo/", {
-      statusCode: 400,
-      ok: false
-    }).as('matchedUrl')
-  cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/scores', {
-    statusCode: 400,
-      ok: false
-  }).as("matchedUrl")
-  cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/details', {
-    statusCode: 400,
-      ok: false
-  }).as("matchedUrl")
-  cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/images/', {
-    statusCode: 400,
-      ok: false
-  }).as("matchedUrl")
-  cy.visit('http://localhost:3000/')
-  .get('h1[class=".error-container"]')
-  .contains("Sorry, We're having trouble getting that. Please try again!")
-});
+// it('As a user, if the server is down, I will get an error message', () => {
+//   cy.intercept('GET', "https://api.teleport.org/api/urban_areas/slug:buffalo/", {
+//       statusCode: 400,
+//       ok: false
+//     }).as('matchedUrl')
+//   cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/scores', {
+//     statusCode: 400,
+//       ok: false
+//   }).as("matchedUrl")
+//   cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/details', {
+//     statusCode: 400,
+//       ok: false
+//   }).as("matchedUrl")
+//   cy.intercept('GET', 'https://api.teleport.org/api/urban_areas/slug:buffalo/images/', {
+//     statusCode: 400,
+//       ok: false
+//   }).as("matchedUrl")
+//   cy.visit('http://localhost:3000/')
+//   .get('h1[class=".error-container"]')
+//   .contains("Sorry, We're having trouble getting that. Please try again!")
+// });
 
 
 });
